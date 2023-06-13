@@ -1,7 +1,7 @@
 import {Counter} from "../features/counter/Counter";
 import {useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "./hooks";
-import {appActions} from "./app.slice";
+import {appActions} from "./appSlice";
 
 function App() {
 	const isLoading = useAppSelector((state) => state.app.isLoading);
