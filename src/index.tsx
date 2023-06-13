@@ -6,6 +6,7 @@ import App from './app/App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {Register} from "./features/auth/register/Register";
 
 const router = createBrowserRouter([
 	{
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
 		element: <div>Hello, its logout page</div>
 	}, {
 		path: '/register',
-		element: <div>Hello, its register page</div>
+		element: <Register/>
 	}, {
 		path: '/profile',
 		element: <div>Hello, its profile page</div>
@@ -31,12 +32,10 @@ const container = document.getElementById('root')!;
 const root = createRoot(container);
 
 root.render(
-	<React.StrictMode>
+	<Provider store={store}>
 		<RouterProvider router={router}/>
-		<Provider store={store}>
-			<App/>
-		</Provider>
-	</React.StrictMode>
+		<App/>
+	</Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
