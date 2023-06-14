@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 const appInitialState = {
 	error: null as null | string,
-	isLoading: true,
+	isLoading: false,
 	isAppInitialized: false,
 }
 
