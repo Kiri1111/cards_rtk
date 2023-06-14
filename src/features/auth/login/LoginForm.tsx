@@ -21,8 +21,7 @@ export const LoginForm = () => {
 		formState: {errors},
 	} = useForm<Inputs>()
 
-	const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
-	//dispatch(authThunks.login(data))
+	const onSubmit: SubmitHandler<Inputs> = (data) => dispatch(authThunks.login(data))
 
 	return (
 
