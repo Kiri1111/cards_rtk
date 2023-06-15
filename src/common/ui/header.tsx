@@ -8,9 +8,9 @@ export const Header = () => {
 		<div className={s.header}>
 			<h2>Обучение по карточкам</h2>
 			<nav>
-				<NavLink to={'/login'}>Вход</NavLink>
-				<NavLink to={'/profile'}>Мой профиль</NavLink>
-				<NavLink to={'/register'}>Регистрация</NavLink>
+				<NavLink to={'/login'}>-Вход-</NavLink>
+				<NavLink to={'/profile'}>-Мой профиль-</NavLink>
+				<NavLink to={'/register'}>-Регистрация-</NavLink>
 			</nav>
 
 			<LogoutButton/>

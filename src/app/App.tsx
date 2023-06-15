@@ -6,17 +6,18 @@ import {Register} from "../features/auth/register/Register";
 
 function App() {
 
-	<Routes>
-		<Route path={'/*'} element={<Navigate to={'/404'}/>}/>
-		<Route path={'/404'} element={<div>not found</div>}/>
-		<Route path={'/login'} element={<Login/>}/>
-		<Route path={'/profile'} element={<ProfilePage/>}/>
-		<Route path={'/registration'} element={<Register/>}/>
-	</Routes>
 
 	return (
 		<div className="App">
 			<Header/>
+			<Routes>
+				<Route path={'/*'} element={<Navigate to={'/404'}/>}/>
+				<Route path={'/404'} element={<div>not found</div>}/>
+				<Route path={'/login'} element={<Login/>}/>
+				<Route path={'/profile'} element={<ProfilePage/>}/>
+				<Route path={'/register'} element={<Register/>}/>
+			</Routes>
+
 		</div>
 	);
 }
