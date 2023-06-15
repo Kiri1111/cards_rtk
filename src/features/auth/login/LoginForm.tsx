@@ -28,13 +28,13 @@ export const LoginForm = () => {
 		<form className={s.form} onSubmit={handleSubmit(onSubmit)}>
 			<div><h1>Вход</h1></div>
 			<div className={s.input}>
-				<input  {...register("email")}/>
+				Почта: <input  {...register("email")}/>
 			</div>
 			<div className={s.input}>
-				<input  {...register("password")}/>
+				Пароль: <input  {...register("password")}/>
 			</div>
 			<div className={s.input}>
-				Запомнить:
+				Запомнить меня:
 				<input type={"checkbox"} {...register('rememberMe')}/>
 			</div>
 

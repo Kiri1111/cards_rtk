@@ -13,22 +13,26 @@ import {Header} from "./common/ui/header";
 
 // const router = createBrowserRouter([
 // 	{
-// 		path: '/',
-// 		element: <div>Hello, its main page</div>
+// 		element: <Header/>,
+// 		children: [
+// 			{
+// 				path: '/',
+// 				element: <div>Hello, its main page</div>
+// 			}, {
+// 				path: '/login',
+// 				element: <Login/>
+// 			}, {
+// 				path: '/logout',
+// 				element: <div>Hello, its logout page</div>
+// 			}, {
+// 				path: '/register',
+// 				element: <Register/>
+// 			}, {
+// 				path: '/profile',
+// 				element: <ProfilePage/>
+// 			}
+// 		],
 // 	},
-// 	{
-// 		path: '/login',
-// 		element: <Login/>
-// 	}, {
-// 		path: '/logout',
-// 		element: <div>Hello, its logout page</div>
-// 	}, {
-// 		path: '/register',
-// 		element: <Register/>
-// 	}, {
-// 		path: '/profile',
-// 		element: <ProfilePage/>
-// 	}
 // ])
 
 const container = document.getElementById('root')!;
