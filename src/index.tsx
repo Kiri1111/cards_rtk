@@ -8,7 +8,7 @@ import './index.css';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {Register} from "./features/auth/register/Register";
 import {Login} from "./features/auth/login/Login";
-import {ProfilePage} from "./features/profile/ProfilePage";
+import {ProfilePage} from "./features/profile/ProfilePage/ProfilePage";
 
 const router = createBrowserRouter([
 	{

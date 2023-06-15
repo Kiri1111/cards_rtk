@@ -7,7 +7,6 @@ import s from './Register.module.scss'
 type Inputs = {
 	email: string
 	password: string
-	confirmPassword: string
 }
 
 export const RegisterForm = () => {
@@ -28,14 +27,12 @@ export const RegisterForm = () => {
 		<form className={s.form} onSubmit={handleSubmit(onSubmit)}>
 			<div><h1>Регистрация</h1></div>
 			<div className={s.input}>
-				<input  {...register("email")}/>
+				Почта: <input  {...register("email")}/>
 			</div>
 			<div className={s.input}>
-				<input  {...register("password")}/>
+				Пароль: <input  {...register("password")}/>
 			</div>
-			<div className={s.input}>
-				<input/>
-			</div>
+
 
 			<input type="submit"/>
 		</form>

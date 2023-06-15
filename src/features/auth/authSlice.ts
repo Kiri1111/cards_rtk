@@ -20,7 +20,7 @@ const logout = createAppAsyncThunk('auth/login', async () => {
 const slice = createSlice({
 	name: 'auth',
 	initialState: {
-		profile: null as ProfileType | null
+		profile: {} as ProfileType
 	},
 	reducers: {
 		// setProfile(state, action: PayloadAction<{ profile: ProfileType }>) {
@@ -36,6 +36,7 @@ const slice = createSlice({
 			.addCase(register.rejected, (state, action) => {
 				console.log('warning, some mistake')
 			})
+
 	}
 })
 
