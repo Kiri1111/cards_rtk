@@ -5,6 +5,7 @@ import {ProfilePage} from "../features/profile/ProfilePage/ProfilePage";
 import {Register} from "../features/auth/register/Register";
 import s from './App.module.scss'
 import {RecoveryPassword} from "../features/auth/recoveryPassword/RecoveryPassword";
+import {CreateNewPassword} from "../features/auth/CreateNewPassword/CreateNewPassword";
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
 				<Route path={'/profile'} element={<ProfilePage/>}/>
 				<Route path={'/register'} element={<Register/>}/>
 				<Route path={'/recoveryPassword'} element={<RecoveryPassword/>}/>
+				<Route path={'/set-new-password/:id'} element={<CreateNewPassword/>}/>
 				<Route path={'/'} element={<h1>Добро пожаловать в приложение!!!</h1>}/>
 			</Routes>
 

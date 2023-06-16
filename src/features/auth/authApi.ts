@@ -15,10 +15,13 @@ export const authApi = {
 		return axios.post('https://neko-back.herokuapp.com/2.0/auth/forgot', {
 			email, message: `<div style="background-color: lime; padding: 15px">
 Перейдите по ссылке, чтобы продолжить восстановление пароля : 
-<a href='http://localhost:3000/#/set-new-password/$token$'>
+<a href='http://localhost:3000/set-new-password/$token$'>
 !!!Ссылка!!!</a>
 </div>`
 		})
+	},
+	setNewPassword(password: string, resetPasswordToken: string) {
+		return instance.post('https://neko-back.herokuapp.com/2.0/auth/forgot', {password, resetPasswordToken})
 	}
 }
 
