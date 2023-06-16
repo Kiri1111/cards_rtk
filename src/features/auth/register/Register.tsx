@@ -3,10 +3,11 @@ import {RegisterForm} from "./RegisterForm";
 import s from './Register.module.scss'
 import {Navigate} from "react-router-dom";
 import {useAppSelector} from "../../../app/hooks";
+import {appIsLoggedInSelector} from "../../../app/appSelectors";
 
 export const Register = () => {
 
-	const isLoggedIn = useAppSelector(state => state.app.isLoggedIn)
+	const isLoggedIn = useAppSelector(appIsLoggedInSelector)
 
 
 	if (isLoggedIn) {

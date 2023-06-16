@@ -9,7 +9,7 @@ import {BrowserRouter, createBrowserRouter, Link, RouterProvider} from "react-ro
 import {Register} from "./features/auth/register/Register";
 import {Login} from "./features/auth/login/Login";
 import {ProfilePage} from "./features/profile/ProfilePage/ProfilePage";
-import {Header} from "./common/ui/header";
+import {Header} from "./common/ui/components/header";
 
 // const router = createBrowserRouter([
 // 	{

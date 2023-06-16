@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Header.module.scss'
-import {LogoutButton} from "../../features/auth/logout/LogoutButton";
+import {LogoutButton} from "../../../features/auth/logout/LogoutButton";
 import {Link, NavLink, Outlet} from "react-router-dom";
 
 export const Header = () => {

@@ -2,10 +2,12 @@ import React from 'react';
 import {useAppSelector} from "../../../app/hooks";
 import {Navigate} from "react-router-dom";
 import s from './Profile.module.scss'
+import {profileNameSelector} from "../../auth/authSelectors";
+import {appIsLoggedInSelector} from "../../../app/appSelectors";
 
 export const ProfilePage = () => {
-	const userName = useAppSelector(state => state.auth.profile.name)
-	const isLoggedIn = useAppSelector(state => state.app.isLoggedIn)
+	const userName = useAppSelector(profileNameSelector)
+	const isLoggedIn = useAppSelector(appIsLoggedInSelector)
 
 	if (!isLoggedIn) {
 		return <Navigate to={'/login'}/>
