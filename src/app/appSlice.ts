@@ -14,8 +14,8 @@ const slice = createSlice({
 		setIsLoading: (state, action: PayloadAction<{ isLoading: boolean }>) => {
 			state.isLoading = action.payload.isLoading
 		},
-		setIsLoggedIn: (state, action: PayloadAction<{ value: boolean }>) => {
-			state.isLoggedIn = action.payload.value
+		setIsLoggedIn: (state, action: PayloadAction<{ isLogged: boolean }>) => {
+			state.isLoggedIn = action.payload.isLogged
 		}
 	}
 })

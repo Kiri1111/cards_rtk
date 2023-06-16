@@ -9,15 +9,18 @@ const register = createAppAsyncThunk<void, ArgRegisterType>('auth/register', asy
 
 const login = createAppAsyncThunk<{ profile: ProfileType }, ArgLoginType>('auth/login', async (arg, thunkAPI) => {
 	const dispatch = thunkAPI.dispatch
+	dispatch(appActions.setIsLoading({isLoading: true}))
 	const res = await authApi.login(arg)
-	dispatch(appActions.setIsLoggedIn({value: true}))
+	dispatch(appActions.setIsLoggedIn({isLogged: true}))
+	dispatch(appActions.setIsLoading({isLoading: false}))
+
 	return {profile: res.data}
 })
 
 const logout = createAppAsyncThunk('auth/login', async (_, thunkAPI) => {
 	const dispatch = thunkAPI.dispatch
 	const res = await authApi.logout()
-	dispatch(appActions.setIsLoggedIn({value: false}))
+	dispatch(appActions.setIsLoggedIn({isLogged: false}))
 
 	console.log(res.data)
 })
