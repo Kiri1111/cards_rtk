@@ -25,6 +25,20 @@ const logout = createAppAsyncThunk('auth/login', async (_, thunkAPI) => {
 	console.log(res.data)
 })
 
+const recoveryPassword = createAppAsyncThunk<void, { email: string }>('auth/recoveryPassword', async (arg, thunkAPI) => {
+	const dispatch = thunkAPI.dispatch
+	dispatch(appActions.setIsLoading({isLoading: true}))
+
+	try {
+		const res = await authApi.recoveryPassword(arg.email)
+	} catch (e) {
+		console.log(e)
+	} finally {
+		dispatch(appActions.setIsLoading({isLoading: false}))
+
+	}
+
+})
 
 const slice = createSlice({
 	name: 'auth',
@@ -46,4 +60,4 @@ const slice = createSlice({
 
 export const authReducer = slice.reducer
 export const authActions = slice.actions
-export const authThunks = {register, login, logout}
+export const authThunks = {register, login, logout, recoveryPassword}

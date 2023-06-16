@@ -17,7 +17,6 @@ export const Register = () => {
 
 	return (
 		<div className={s.registerPage}>
-
 			<RegisterForm/>
 		</div>
 	);

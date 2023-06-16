@@ -19,6 +19,7 @@ export const Login = () => {
 			{isLoading ? <Preloader width={'300'}/> : <div className={s.LoginPage}>
 				<LoginForm/>
 			</div>}
+
 		</div>
 
 	);

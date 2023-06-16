@@ -1,4 +1,5 @@
 import {instance} from "../../common/api/commonApi";
+import axios from "axios";
 
 export const authApi = {
 	register(arg: ArgRegisterType) {
@@ -9,6 +10,15 @@ export const authApi = {
 	},
 	logout() {
 		return instance.delete('auth/me')
+	},
+	recoveryPassword(email: string) {
+		return axios.post('https://neko-back.herokuapp.com/2.0/auth/forgot', {
+			email, message: `<div style="background-color: lime; padding: 15px">
+Перейдите по ссылке, чтобы продолжить восстановление пароля : 
+<a href='http://localhost:3000/#/set-new-password/$token$'>
+!!!Ссылка!!!</a>
+</div>`
+		})
 	}
 }
 

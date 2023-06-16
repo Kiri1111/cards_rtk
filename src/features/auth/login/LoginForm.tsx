@@ -3,6 +3,7 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {useAppDispatch} from "../../../app/hooks";
 import {authThunks} from "../authSlice";
 import s from './Login.module.scss'
+import {NavLink} from "react-router-dom";
 
 type Inputs = {
 	email: string
@@ -39,6 +40,9 @@ export const LoginForm = () => {
 			</div>
 
 			<input type="submit"/>
+
+			<NavLink to={'/recoveryPassword'}>Забыли пароль?</NavLink>
+
 		</form>
 	)
 }
