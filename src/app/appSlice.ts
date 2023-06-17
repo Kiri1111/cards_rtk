@@ -16,6 +16,9 @@ const slice = createSlice({
 		},
 		setIsLoggedIn: (state, action: PayloadAction<{ isLogged: boolean }>) => {
 			state.isLoggedIn = action.payload.isLogged
+		},
+		setError: (state, action: PayloadAction<{ error: string }>) => {
+			state.error = action.payload.error
 		}
 	}
 })

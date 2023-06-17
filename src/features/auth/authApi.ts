@@ -21,7 +21,7 @@ export const authApi = {
 		})
 	},
 	setNewPassword(password: string, resetPasswordToken: string) {
-		return instance.post('https://neko-back.herokuapp.com/2.0/auth/forgot', {password, resetPasswordToken})
+		return axios.post('https://neko-back.herokuapp.com/2.0/auth/forgot', {password, resetPasswordToken})
 	}
 }
 
