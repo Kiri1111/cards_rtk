@@ -7,13 +7,11 @@ import {appIsLoadingSelector, appIsLoggedInSelector} from "../../../app/appSelec
 import {Preloader} from "../../../common/ui/components/Preloader";
 
 export const Login = () => {
-
 	const isLoggedIn = useAppSelector(appIsLoggedInSelector)
 	const isLoading = useAppSelector(appIsLoadingSelector)
 	if (isLoggedIn) {
 		return <Navigate to={'/profile'}/>
 	}
-
 	return (
 		<div>
 			{isLoading ? <Preloader width={'300'}/> : <div className={s.LoginPage}>

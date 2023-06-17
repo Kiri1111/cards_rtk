@@ -12,7 +12,6 @@ export const CreateNewPassword = () => {
 	const dispatch = useAppDispatch()
 	const [newPassword, setNewPassword] = useState('')
 	const isLoading = useAppSelector(appIsLoadingSelector)
-	const error = useAppSelector(appErrorSelector)
 	const isLoggedIn = useAppSelector(appIsLoggedInSelector)
 	const path = useParams()
 
@@ -30,7 +29,6 @@ export const CreateNewPassword = () => {
 		<div className={style.createPasswordPage}>
 			<div className={style.form}>
 				<h3>Придумайте новый пароль</h3>
-				{error ? <div>oooooo</div> : ''}
 				<input onChange={(e => setNewPassword(e.currentTarget.value))} type="password" placeholder={'пароль'}/>
 				<h4>Создайте новый пароль, и мы отправим вам дальнейшие инструкции по электронной почте.</h4>
 				{isLoading ? <Preloader width={'300'}/> :

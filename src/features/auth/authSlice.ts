@@ -15,11 +15,11 @@ const login = createAppAsyncThunk<{ profile: ProfileType }, ArgLoginType>('auth/
 		dispatch(appActions.setIsLoggedIn({isLogged: true}))
 		return {profile: res.data}
 	} catch (e: any) {
-		dispatch(appActions.setError(e.response.data.error))
-		debugger
-		return rejectWithValue(e.response.data.error)
+		dispatch(appActions.setError({error: e.response.data.error}))
+		return rejectWithValue({error: e.response.data.error})
 	} finally {
 		dispatch(appActions.setIsLoading({isLoading: false}))
+
 	}
 })
 
@@ -39,8 +39,10 @@ const recoveryPassword = createAppAsyncThunk<void, { email: string }>('auth/reco
 		return rejectWithValue(e.response.data.error)
 	} finally {
 		dispatch(appActions.setIsLoading({isLoading: false}))
+
 	}
 })
+
 const setNewPassword = createAppAsyncThunk<void, { newPassword: string, resetPasswordToken: string }>('auth/setNewPassword', async (arg, thunkAPI) => {
 	const {dispatch, rejectWithValue} = thunkAPI
 	dispatch(appActions.setIsLoading({isLoading: true}))

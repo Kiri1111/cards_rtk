@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 const appInitialState = {
-	error: null as null | string,
+	error: null as string | null,
 	isLoading: false,
 	isAppInitialized: false,
 	isLoggedIn: false
@@ -17,9 +17,9 @@ const slice = createSlice({
 		setIsLoggedIn: (state, action: PayloadAction<{ isLogged: boolean }>) => {
 			state.isLoggedIn = action.payload.isLogged
 		},
-		setError: (state, action: PayloadAction<{ error: string }>) => {
+		setError: (state, action: PayloadAction<{ error: string | null }>) => {
 			state.error = action.payload.error
-		}
+		},
 	}
 })
 
