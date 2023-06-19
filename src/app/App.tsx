@@ -6,12 +6,17 @@ import {Register} from "../features/auth/register/Register";
 import s from './App.module.scss'
 import {RecoveryPassword} from "../features/auth/recoveryPassword/RecoveryPassword";
 import {CreateNewPassword} from "../features/auth/CreateNewPassword/CreateNewPassword";
+import {useAppSelector} from "./hooks";
+import {appIsLoadingSelector} from "./appSelectors";
+import {Preloader} from "../common/ui/components/Preloader";
 
 function App() {
 
+	const isLoading = useAppSelector(appIsLoadingSelector)
 
 	return (
 		<div className={s.app}>
+			{isLoading && <Preloader width={'60px'}/>}
 			<Header/>
 			<Routes>
 				<Route path={'/*'} element={<Navigate to={'/404'}/>}/>
@@ -23,7 +28,6 @@ function App() {
 				<Route path={'/set-new-password/:id'} element={<CreateNewPassword/>}/>
 				<Route path={'/'} element={<h1>Добро пожаловать в приложение!!!</h1>}/>
 			</Routes>
-
 		</div>
 	);
 }

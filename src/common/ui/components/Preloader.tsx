@@ -8,7 +8,9 @@ type PreloaderWidthType = {
 export const Preloader: FC<PreloaderWidthType> = ({width}) => {
 	return (
 		<div>
-			<img alt={'Preloader'} style={{width: width}} src={preloader}/>
+			<img alt={'Preloader'}
+				 style={{width: width, position: "absolute", top: '100px'}}
+				 src={preloader}/>
 		</div>
 	);
 };

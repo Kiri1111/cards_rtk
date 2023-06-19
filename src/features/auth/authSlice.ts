@@ -2,25 +2,21 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {ArgLoginType, ArgRegisterType, authApi, ProfileType} from "./authApi";
 import {createAppAsyncThunk} from "../../common/utils/createAppAsyncThunk";
 import {appActions, appReducer} from "../../app/appSlice";
+import {thunkTryCatch} from "../../common/utils/thunkTryCatch";
 
 const register = createAppAsyncThunk<void, ArgRegisterType>('auth/register', async (arg) => {
 	const res = await authApi.register(arg)
 })
 
 const login = createAppAsyncThunk<{ profile: ProfileType }, ArgLoginType>('auth/login', async (arg, thunkAPI) => {
-	const {dispatch, rejectWithValue} = thunkAPI
-	dispatch(appActions.setIsLoading({isLoading: true}))
-	try {
+	const dispatch = thunkAPI.dispatch
+	return thunkTryCatch(thunkAPI, async () => {
 		const res = await authApi.login(arg)
-		dispatch(appActions.setIsLoggedIn({isLogged: true}))
+		if (res.data) {
+			dispatch(appActions.setIsLoggedIn({isLogged: true}))
+		}
 		return {profile: res.data}
-	} catch (e: any) {
-		dispatch(appActions.setError({error: e.response.data.error}))
-		return rejectWithValue({error: e.response.data.error})
-	} finally {
-		dispatch(appActions.setIsLoading({isLoading: false}))
-
-	}
+	})
 })
 
 const logout = createAppAsyncThunk('auth/login', async (_, thunkAPI) => {
@@ -71,6 +67,24 @@ const slice = createSlice({
 			.addCase(register.rejected, (state, action) => {
 				console.log('warning, some mistake')
 			})
+			.addCase(logout.fulfilled, (state) => {
+				state.profile = {
+					email: '',
+					name: '',
+					_id: '',
+					created: '',
+					isAdmin: false,
+					_v: 0,
+					publicCardPacksCount: 0,
+					rememberMe: false,
+					token: '',
+					updated: '',
+					verified: false,
+					tokenDeathTime: 0
+
+				}
+			})
+
 
 	}
 })
