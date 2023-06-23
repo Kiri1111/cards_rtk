@@ -9,7 +9,8 @@ import {BrowserRouter, createBrowserRouter, Link, RouterProvider} from "react-ro
 import {Register} from "./features/auth/register/Register";
 import {Login} from "./features/auth/login/Login";
 import {ProfilePage} from "./features/profile/ProfilePage/ProfilePage";
-import {Header} from "./common/ui/components/header";
+import {Header} from "./common/ui/components/Header";
+import {GlobalError} from "./common/ui/components/GlobalError";
 
 // const router = createBrowserRouter([
 // 	{
@@ -42,6 +43,7 @@ root.render(
 	<BrowserRouter>
 
 		<Provider store={store}>
+			<GlobalError/>
 			<App/>
 			{/*<RouterProvider router={router}/>*/}
 		</Provider>

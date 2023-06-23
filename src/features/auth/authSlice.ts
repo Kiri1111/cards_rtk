@@ -67,23 +67,23 @@ const slice = createSlice({
 			.addCase(register.rejected, (state, action) => {
 				console.log('warning, some mistake')
 			})
-			.addCase(logout.fulfilled, (state) => {
-				state.profile = {
-					email: '',
-					name: '',
-					_id: '',
-					created: '',
-					isAdmin: false,
-					_v: 0,
-					publicCardPacksCount: 0,
-					rememberMe: false,
-					token: '',
-					updated: '',
-					verified: false,
-					tokenDeathTime: 0
-
-				}
-			})
+		// .addCase(logout.fulfilled, (state) => {
+		// 	state.profile = {
+		// 		email: '',
+		// 		name: '',
+		// 		_id: '',
+		// 		created: '',
+		// 		isAdmin: false,
+		// 		_v: 0,
+		// 		publicCardPacksCount: 0,
+		// 		rememberMe: false,
+		// 		token: '',
+		// 		updated: '',
+		// 		verified: false,
+		// 		tokenDeathTime: 0
+		//
+		// 	}
+		// })
 
 
 	}

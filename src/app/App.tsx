@@ -1,5 +1,5 @@
 import {Navigate, Route, Routes} from "react-router-dom";
-import {Header} from "../common/ui/components/header";
+import {Header} from "../common/ui/components/Header";
 import {Login} from "../features/auth/login/Login";
 import {ProfilePage} from "../features/profile/ProfilePage/ProfilePage";
 import {Register} from "../features/auth/register/Register";
