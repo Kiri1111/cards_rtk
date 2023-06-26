@@ -7,6 +7,7 @@ import {appIsLoggedInSelector} from "../../../app/appSelectors";
 
 export const Login = () => {
 	const isLoggedIn = useAppSelector(appIsLoggedInSelector)
+
 	if (isLoggedIn) {
 		return <Navigate to={'/profile'}/>
 	}

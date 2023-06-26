@@ -1,7 +1,7 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 import {ArgLoginType, ArgRegisterType, authApi, ProfileType} from "./authApi";
 import {createAppAsyncThunk} from "../../common/utils/createAppAsyncThunk";
-import {appActions, appReducer} from "../../app/appSlice";
+import {appActions} from "../../app/appSlice";
 import {thunkTryCatch} from "../../common/utils/thunkTryCatch";
 
 const register = createAppAsyncThunk<void, ArgRegisterType>('auth/register', async (arg) => {
@@ -39,6 +39,17 @@ const recoveryPassword = createAppAsyncThunk<void, { email: string }>('auth/reco
 	}
 })
 
+const me = createAppAsyncThunk('auth/me', async (arg, thunkAPI) => {
+	const dispatch = thunkAPI.dispatch
+	return thunkTryCatch(thunkAPI, async () => {
+		const res = await authApi.me()
+		if (res.data) {
+			dispatch(appActions.setIsLoggedIn({isLogged: true}))
+		}
+		return {profile: res.data}
+	})
+})
+
 const setNewPassword = createAppAsyncThunk<void, { newPassword: string, resetPasswordToken: string }>('auth/setNewPassword', async (arg, thunkAPI) => {
 	const {dispatch, rejectWithValue} = thunkAPI
 	dispatch(appActions.setIsLoading({isLoading: true}))
@@ -62,6 +73,9 @@ const slice = createSlice({
 	extraReducers: builder => {
 		builder
 			.addCase(login.fulfilled, (state, action) => {
+				state.profile = action.payload.profile
+			})
+			.addCase(me.fulfilled, (state, action) => {
 				state.profile = action.payload.profile
 			})
 			.addCase(register.rejected, (state, action) => {
@@ -93,5 +107,5 @@ export const authReducer = slice.reducer
 export const authActions = slice.actions
 export const authThunks = {
 	register, login, logout, recoveryPassword,
-	setNewPassword
+	setNewPassword, me
 }

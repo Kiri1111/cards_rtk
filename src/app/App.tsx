@@ -6,13 +6,20 @@ import {Register} from "../features/auth/register/Register";
 import s from './App.module.scss'
 import {RecoveryPassword} from "../features/auth/recoveryPassword/RecoveryPassword";
 import {CreateNewPassword} from "../features/auth/CreateNewPassword/CreateNewPassword";
-import {useAppSelector} from "./hooks";
+import {useAppDispatch, useAppSelector} from "./hooks";
 import {appIsLoadingSelector} from "./appSelectors";
 import {Preloader} from "../common/ui/components/Preloader";
+import {PacksList} from "../features/packs/PacksList";
+import {useEffect} from "react";
+import {authThunks} from "../features/auth/authSlice";
 
 function App() {
 
 	const isLoading = useAppSelector(appIsLoadingSelector)
+	const dispatch = useAppDispatch()
+	useEffect(() => {
+		dispatch(authThunks.me())
+	}, [])
 
 	return (
 		<div className={s.app}>
@@ -23,6 +30,7 @@ function App() {
 				<Route path={'/404'} element={<div>not found</div>}/>
 				<Route path={'/login'} element={<Login/>}/>
 				<Route path={'/profile'} element={<ProfilePage/>}/>
+				<Route path={'/packsList'} element={<PacksList/>}/>
 				<Route path={'/register'} element={<Register/>}/>
 				<Route path={'/recoveryPassword'} element={<RecoveryPassword/>}/>
 				<Route path={'/set-new-password/:id'} element={<CreateNewPassword/>}/>

@@ -2,6 +2,9 @@ import {instance} from "../../common/api/commonApi";
 import axios from "axios";
 
 export const authApi = {
+	me() {
+		return instance.post('auth/me')
+	},
 	register(arg: ArgRegisterType) {
 		return instance.post<RegisterResponseType>('auth/register', arg)
 	},
