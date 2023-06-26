@@ -9,7 +9,7 @@ import {CreateNewPassword} from "../features/auth/CreateNewPassword/CreateNewPas
 import {useAppDispatch, useAppSelector} from "./hooks";
 import {appIsLoadingSelector} from "./appSelectors";
 import {Preloader} from "../common/ui/components/Preloader";
-import {PacksList} from "../features/packs/PacksList";
+import {PacksList} from "../features/packs/packsList/PacksList";
 import {useEffect} from "react";
 import {authThunks} from "../features/auth/authSlice";
 
