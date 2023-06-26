@@ -8,13 +8,12 @@ export const PacksList = () => {
 	const dispatch = useAppDispatch()
 	const packsCount = useAppSelector(cardPacksTotalCountSelector)
 
-	console.log(packsCount)
 	useEffect(() => {
 		dispatch(packsThunks.getPacks())
 	}, [])
 	return (
 		<div>
-			<h2>Общее количество карточек: {packsCount}</h2>
+			<h2>Общее количество карточек: {packsCount} шт.</h2>
 		</div>
 	);
 };
