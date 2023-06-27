@@ -16,9 +16,10 @@ export type PacksType = {
 	pageCount: number
 }
 
-type CardsPackType = {
+export type CardsPackType = {
 	_id: string
 	user_id: string
+	user_name: string
 	name: string
 	cardsCount: number
 	created: string
