@@ -3,6 +3,7 @@ import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {packsThunks} from "../packsSlice";
 import {cardPacksTotalCountSelector, packsSelector} from "../../profile/packsSelectors";
 import {DataTable} from "./dataTable";
+import {appIsLoadingSelector} from "../../../app/appSelectors";
 
 export const PacksList = () => {
 
@@ -14,10 +15,16 @@ export const PacksList = () => {
 		page: 0,
 	});
 
-
 	useEffect(() => {
-		dispatch(packsThunks.getPacks({pageSize: paginationModel.pageSize, page: paginationModel.page}))
+		dispatch(packsThunks.getPacks({page: paginationModel.page, pageSize: paginationModel.pageSize}))
 	}, [])
+
+
+	console.log(packs)
+	if (!packs) {
+		return <div>Loading packs</div>
+	}
+
 	return (
 		<div>
 			<h2>Общее количество карточек: {packsCount} шт.</h2>

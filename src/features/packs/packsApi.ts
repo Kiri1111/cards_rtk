@@ -3,7 +3,8 @@ import {AxiosResponse} from "axios";
 
 export const packsApi = {
 	getPacks(arg: ArgGetPacksType) {
-		return instance.get<AxiosResponse<PacksType>>('cards/pack', arg)
+
+		return instance.get<AxiosResponse<PacksType>>(`cards/pack?page=${arg.page}&pageCount=${arg.pageSize}`)
 	}
 }
 
@@ -27,7 +28,7 @@ export type CardsPackType = {
 	updated: string
 }
 
-type ArgGetPacksType = {
+export type ArgGetPacksType = {
 	pageSize: number
 	page: number
 }

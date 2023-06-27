@@ -48,7 +48,7 @@ export function DataTable(props: PropsType) {
 				columns={columns}
 				initialState={{
 					// pagination: {
-					// 	paginationModel,
+					// 	props.paginationModel,
 					// },
 				}}
 				pageSizeOptions={[5, 10]}
