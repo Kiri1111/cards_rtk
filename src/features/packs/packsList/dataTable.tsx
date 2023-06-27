@@ -1,13 +1,16 @@
 import * as React from 'react';
-import {DataGrid, GridColDef, GridValueGetterParams} from '@mui/x-data-grid';
+import {DataGrid, GridCallbackDetails, GridColDef, GridPaginationModel, GridValueGetterParams} from '@mui/x-data-grid';
 import {CardsPackType} from "../packsApi";
 
 
 type PropsType = {
 	arrayToDraw: CardsPackType[]
+	paginationModel: GridPaginationModel
+	setPaginationModel: any
 }
 
 export function DataTable(props: PropsType) {
+
 
 	const columns: GridColDef[] = [
 		{field: 'title', headerName: 'Название', width: 160},
@@ -39,16 +42,16 @@ export function DataTable(props: PropsType) {
 	return (
 		<div style={{height: 650, width: '100%'}}>
 			<DataGrid
-
+				paginationModel={props.paginationModel}
+				onPaginationModelChange={props.setPaginationModel}
 				rows={rows}
 				columns={columns}
 				initialState={{
-					pagination: {
-						paginationModel: {page: 0, pageSize: 5},
-					},
+					// pagination: {
+					// 	paginationModel,
+					// },
 				}}
 				pageSizeOptions={[5, 10]}
-				// checkboxSelection
 			/>
 		</div>
 	);

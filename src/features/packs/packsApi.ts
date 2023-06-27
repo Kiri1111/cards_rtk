@@ -1,8 +1,9 @@
 import {instance} from "../../common/api/commonApi";
+import {AxiosResponse} from "axios";
 
 export const packsApi = {
-	getPacks() {
-		return instance.get<PacksType>('cards/pack')
+	getPacks(arg: ArgGetPacksType) {
+		return instance.get<AxiosResponse<PacksType>>('cards/pack', arg)
 	}
 }
 
@@ -24,4 +25,9 @@ export type CardsPackType = {
 	cardsCount: number
 	created: string
 	updated: string
+}
+
+type ArgGetPacksType = {
+	pageSize: number
+	page: number
 }

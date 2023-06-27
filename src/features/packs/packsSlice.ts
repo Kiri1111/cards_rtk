@@ -3,9 +3,9 @@ import {packsApi, PacksType} from "./packsApi";
 import {createAppAsyncThunk} from "../../common/utils/createAppAsyncThunk";
 import {thunkTryCatch} from "../../common/utils/thunkTryCatch";
 
-const getPacks = createAppAsyncThunk('packs/getPacks', async (arg, thunkAPI) => {
+const getPacks = createAppAsyncThunk<{ packs: PacksType }, { pageSize: number, page: number }>('packs/getPacks', async (arg, thunkAPI) => {
 	return thunkTryCatch(thunkAPI, async () => {
-		const res = await packsApi.getPacks()
+		const res = await packsApi.getPacks(arg)
 		return {packs: res.data}
 	})
 })
