@@ -3,6 +3,7 @@ import {ArgLoginType, ArgRegisterType, authApi, ProfileType} from "./authApi";
 import {createAppAsyncThunk} from "../../common/utils/createAppAsyncThunk";
 import {appActions} from "../../app/appSlice";
 import {thunkTryCatch} from "../../common/utils/thunkTryCatch";
+import {ArgChangeProfileAvatarType, profileApi} from "../profile/profileApi";
 
 const register = createAppAsyncThunk<void, ArgRegisterType>('auth/register', async (arg) => {
 	const res = await authApi.register(arg)
@@ -64,6 +65,13 @@ const setNewPassword = createAppAsyncThunk<void, { newPassword: string, resetPas
 	}
 })
 
+const changeProfileAvatar = createAppAsyncThunk<{ profile: ProfileType }, ArgChangeProfileAvatarType>('auth/changeProfile', async (arg, thunkAPI) => {
+	return thunkTryCatch(thunkAPI, async () => {
+		const res = await profileApi.changeProfile({avatar: arg.avatar})
+		return {profile: res.data}
+	})
+})
+
 const slice = createSlice({
 	name: 'auth',
 	initialState: {
@@ -80,6 +88,9 @@ const slice = createSlice({
 			})
 			.addCase(register.rejected, (state, action) => {
 				console.log('warning, some mistake')
+			})
+			.addCase(changeProfileAvatar.fulfilled, (state, action) => {
+				state.profile = action.payload.profile
 			})
 		// .addCase(logout.fulfilled, (state) => {
 		// 	state.profile = {
@@ -106,6 +117,6 @@ const slice = createSlice({
 export const authReducer = slice.reducer
 export const authActions = slice.actions
 export const authThunks = {
-	register, login, logout, recoveryPassword,
+	register, login, changeProfileAvatar, logout, recoveryPassword,
 	setNewPassword, me
 }
