@@ -6,7 +6,9 @@ export const LogoutButton = () => {
 
 	const dispatch = useAppDispatch()
 
-	const logoutHandler = () => dispatch(authThunks.logout())
+	const logoutHandler = () => {
+		dispatch(authThunks.logout())
+	}
 	return (
 		<div>
 			<button onClick={logoutHandler}>Выйти</button>

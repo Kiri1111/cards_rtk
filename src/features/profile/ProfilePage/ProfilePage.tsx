@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {Navigate, NavLink} from "react-router-dom";
 import s from './Profile.module.scss'
@@ -15,11 +15,11 @@ export const ProfilePage = () => {
 	const isLoggedIn = useAppSelector(appIsLoggedInSelector)
 	const avatarFromServer = useAppSelector(profileAvatarSelector)
 
-	const avatar = avatarFromServer ? avatarFromServer : ava
+	const avatar = avatarFromServer == null ? ava : avatarFromServer
 
-	const changeProfileAvatar = (avatar: string | ArrayBuffer | null) => {
+	const changeProfileAvatar = useCallback((avatar: string | ArrayBuffer | null) => {
 		dispatch(authThunks.changeProfileAvatar({avatar}))
-	}
+	}, [avatarFromServer])
 
 	if (!isLoggedIn) {
 		return <Navigate to={'/login'}/>

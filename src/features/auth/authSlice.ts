@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {ArgLoginType, ArgRegisterType, authApi, ProfileType} from "./authApi";
 import {createAppAsyncThunk} from "../../common/utils/createAppAsyncThunk";
 import {appActions} from "../../app/appSlice";
@@ -23,6 +23,7 @@ const login = createAppAsyncThunk<{ profile: ProfileType }, ArgLoginType>('auth/
 const logout = createAppAsyncThunk('auth/login', async (_, thunkAPI) => {
 	const dispatch = thunkAPI.dispatch
 	const res = await authApi.logout()
+	dispatch(authActions.deleteUserProfile())
 	dispatch(appActions.setIsLoggedIn({isLogged: false}))
 })
 
@@ -77,7 +78,11 @@ const slice = createSlice({
 	initialState: {
 		profile: {} as ProfileType
 	},
-	reducers: {},
+	reducers: {
+		deleteUserProfile: (state) => {
+			state.profile = {} as ProfileType
+		},
+	},
 	extraReducers: builder => {
 		builder
 			.addCase(login.fulfilled, (state, action) => {
@@ -90,10 +95,14 @@ const slice = createSlice({
 				console.log('warning, some mistake')
 			})
 			.addCase(changeProfileAvatar.fulfilled, (state, action) => {
-				state.profile = action.payload.profile
+				state.profile.avatar = action.payload.profile.avatar
 			})
+		// .addCase(logout.fulfilled, (state, action) => {
+		// 	state.profile = {} as ProfileType
+		// })
 		// .addCase(logout.fulfilled, (state) => {
 		// 	state.profile = {
+		// 		avatar: '',
 		// 		email: '',
 		// 		name: '',
 		// 		_id: '',

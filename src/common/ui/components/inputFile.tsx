@@ -82,7 +82,7 @@ export const InputTypeFile: FC<PropsType> = ({callBack}) => {
 
 	const sendNewImage = () => {
 		callBack(base64)
-
+		setEditMode(false)
 	}
 	const setAvatarBackground = {
 		backgroundImage: `url(${photoIcon})`
