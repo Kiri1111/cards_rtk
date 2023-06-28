@@ -2,16 +2,18 @@ import React, {useCallback} from 'react';
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {Navigate, NavLink} from "react-router-dom";
 import s from './Profile.module.scss'
-import {profileAvatarSelector, profileNameSelector} from "../../auth/authSelectors";
+import {profileAvatarSelector, profileCardsCountSelector, profileNameSelector} from "../../auth/authSelectors";
 import {appIsLoggedInSelector} from "../../../app/appSelectors";
 import ava from '../../../common/ui/images/avatar.webp'
 import {InputTypeFile} from "../../../common/ui/components/inputFile";
 import {authThunks} from "../../auth/authSlice";
+import {ChangeName} from "./ChangeName";
 
 export const ProfilePage = () => {
 
 	const dispatch = useAppDispatch()
 	const userName = useAppSelector(profileNameSelector)
+	const cardsCount = useAppSelector(profileCardsCountSelector)
 	const isLoggedIn = useAppSelector(appIsLoggedInSelector)
 	const avatarFromServer = useAppSelector(profileAvatarSelector)
 
@@ -20,6 +22,10 @@ export const ProfilePage = () => {
 	const changeProfileAvatar = useCallback((avatar: string | ArrayBuffer | null) => {
 		dispatch(authThunks.changeProfileAvatar({avatar}))
 	}, [avatarFromServer])
+
+	const changeProfileName = useCallback((name: string) => {
+		dispatch(authThunks.changeProfileName({name}))
+	}, [userName])
 
 	if (!isLoggedIn) {
 		return <Navigate to={'/login'}/>
@@ -33,7 +39,9 @@ export const ProfilePage = () => {
 					<h2>Мой профиль:</h2>
 					<img className={s.avatar} src={avatar} alt={'avatar'}/>
 					<InputTypeFile callBack={changeProfileAvatar}/>
-					<div>Имя :{userName}</div>
+					<ChangeName userName={userName} callBack={changeProfileName}/>
+					<div>Количество карточек :{cardsCount}</div>
+
 				</div>
 			</div>
 		</>

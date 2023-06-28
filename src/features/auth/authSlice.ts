@@ -1,9 +1,9 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 import {ArgLoginType, ArgRegisterType, authApi, ProfileType} from "./authApi";
 import {createAppAsyncThunk} from "../../common/utils/createAppAsyncThunk";
 import {appActions} from "../../app/appSlice";
 import {thunkTryCatch} from "../../common/utils/thunkTryCatch";
-import {ArgChangeProfileAvatarType, profileApi} from "../profile/profileApi";
+import {ArgChangeProfileAvatarType, ArgChangeProfileNameType, profileApi} from "../profile/profileApi";
 
 const register = createAppAsyncThunk<void, ArgRegisterType>('auth/register', async (arg) => {
 	const res = await authApi.register(arg)
@@ -20,7 +20,7 @@ const login = createAppAsyncThunk<{ profile: ProfileType }, ArgLoginType>('auth/
 	})
 })
 
-const logout = createAppAsyncThunk('auth/login', async (_, thunkAPI) => {
+const logout = createAppAsyncThunk('auth/logout', async (_, thunkAPI) => {
 	const dispatch = thunkAPI.dispatch
 	const res = await authApi.logout()
 	dispatch(authActions.deleteUserProfile())
@@ -66,9 +66,16 @@ const setNewPassword = createAppAsyncThunk<void, { newPassword: string, resetPas
 	}
 })
 
-const changeProfileAvatar = createAppAsyncThunk<{ profile: ProfileType }, ArgChangeProfileAvatarType>('auth/changeProfile', async (arg, thunkAPI) => {
+const changeProfileAvatar = createAppAsyncThunk<{ profile: { updatedUser: ProfileType } }, ArgChangeProfileAvatarType>('auth/changeProfileAvatar', async (arg, thunkAPI) => {
 	return thunkTryCatch(thunkAPI, async () => {
-		const res = await profileApi.changeProfile({avatar: arg.avatar})
+		const res = await profileApi.changeProfileAvatar({avatar: arg.avatar})
+		return {profile: res.data}
+	})
+})
+
+const changeProfileName = createAppAsyncThunk<{ profile: { updatedUser: ProfileType } }, ArgChangeProfileNameType>('auth/changeProfileName', async (arg, thunkAPI) => {
+	return thunkTryCatch(thunkAPI, async () => {
+		const res = await profileApi.changeProfileName({name: arg.name})
 		return {profile: res.data}
 	})
 })
@@ -91,41 +98,22 @@ const slice = createSlice({
 			.addCase(me.fulfilled, (state, action) => {
 				state.profile = action.payload.profile
 			})
-			.addCase(register.rejected, (state, action) => {
+			.addCase(register.rejected, () => {
 				console.log('warning, some mistake')
 			})
 			.addCase(changeProfileAvatar.fulfilled, (state, action) => {
-				state.profile.avatar = action.payload.profile.avatar
+				console.log(action.payload)
+				state.profile.avatar = action.payload.profile.updatedUser.avatar
 			})
-		// .addCase(logout.fulfilled, (state, action) => {
-		// 	state.profile = {} as ProfileType
-		// })
-		// .addCase(logout.fulfilled, (state) => {
-		// 	state.profile = {
-		// 		avatar: '',
-		// 		email: '',
-		// 		name: '',
-		// 		_id: '',
-		// 		created: '',
-		// 		isAdmin: false,
-		// 		_v: 0,
-		// 		publicCardPacksCount: 0,
-		// 		rememberMe: false,
-		// 		token: '',
-		// 		updated: '',
-		// 		verified: false,
-		// 		tokenDeathTime: 0
-		//
-		// 	}
-		// })
-
-
+			.addCase(changeProfileName.fulfilled, (state, action) => {
+				state.profile.name = action.payload.profile.updatedUser.name
+			})
 	}
 })
 
 export const authReducer = slice.reducer
 export const authActions = slice.actions
 export const authThunks = {
-	register, login, changeProfileAvatar, logout, recoveryPassword,
+	register, login, changeProfileName, changeProfileAvatar, logout, recoveryPassword,
 	setNewPassword, me
 }
