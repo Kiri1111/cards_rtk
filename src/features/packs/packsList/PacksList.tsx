@@ -1,9 +1,8 @@
 import React, {useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {packsThunks} from "../packsSlice";
-import {cardPacksTotalCountSelector, packsSelector} from "../../profile/packsSelectors";
+import {cardPacksTotalCountSelector, packsSelector} from "../packsSelectors";
 import {DataTable} from "./dataTable";
-import {appIsLoadingSelector} from "../../../app/appSelectors";
 
 export const PacksList = () => {
 
@@ -12,15 +11,13 @@ export const PacksList = () => {
 	const packs = useAppSelector(packsSelector)
 	const [paginationModel, setPaginationModel] = React.useState({
 		pageSize: 5,
-		page: 0,
+		page: 1,
 	});
 
 	useEffect(() => {
 		dispatch(packsThunks.getPacks({page: paginationModel.page, pageSize: paginationModel.pageSize}))
-	}, [])
+	}, [paginationModel])
 
-
-	console.log(packs)
 	if (!packs) {
 		return <div>Loading packs</div>
 	}
@@ -28,9 +25,7 @@ export const PacksList = () => {
 	return (
 		<div>
 			<h2>Общее количество карточек: {packsCount} шт.</h2>
-
 			<DataTable arrayToDraw={packs} paginationModel={paginationModel} setPaginationModel={setPaginationModel}/>
-
 		</div>
 	);
 };
