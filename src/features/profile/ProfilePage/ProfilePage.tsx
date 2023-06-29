@@ -5,7 +5,7 @@ import s from './Profile.module.scss'
 import {profileAvatarSelector, profileCardsCountSelector, profileNameSelector} from "../../auth/authSelectors";
 import {appIsLoggedInSelector} from "../../../app/appSelectors";
 import ava from '../../../common/ui/images/avatar.webp'
-import {InputTypeFile} from "../../../common/ui/components/inputFile";
+import {InputTypeFile} from "../../../common/ui/components/InputFile";
 import {authThunks} from "../../auth/authSlice";
 import {ChangeName} from "./ChangeName";
 

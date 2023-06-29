@@ -30,7 +30,7 @@ export const ChangeName: FC<ChangeNamePropsType> = memo(({userName, callBack}) =
 					? <input onChange={onChangeInputHandler} value={value} placeholder={'Enter new Name'}
 							 onBlur={onBlurHandler} autoFocus/>
 					: <div className={style.nameText}>
-						Name: {value}
+						Имя: {value}
 						<img
 							onClick={imgClickHandler} alt={'change name'}
 							src={editName} className={style.changeNameIcon}

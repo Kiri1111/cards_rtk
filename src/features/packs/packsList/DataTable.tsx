@@ -39,9 +39,11 @@ export function DataTable(props: PropsType) {
 		}
 	})
 
+
 	return (
 		<div style={{height: 650, width: '100%'}}>
 			<DataGrid
+
 				paginationModel={props.paginationModel}
 				onPaginationModelChange={props.setPaginationModel}
 				rows={rows}
@@ -51,7 +53,7 @@ export function DataTable(props: PropsType) {
 					// 	props.paginationModel,
 					// },
 				}}
-				pageSizeOptions={[5, 10]}
+				pageSizeOptions={[5, 10, 15]}
 			/>
 		</div>
 	);

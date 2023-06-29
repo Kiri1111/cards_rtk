@@ -1,17 +1,19 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {packsThunks} from "../packsSlice";
 import {cardPacksTotalCountSelector, packsSelector} from "../packsSelectors";
-import {DataTable} from "./dataTable";
+import {DataTable} from "./DataTable";
+import {Modal} from "../../../common/ui/components/modalWindow/Modal";
 
 export const PacksList = () => {
 
+	const [viewModal, setViewModal] = useState(true)
 	const dispatch = useAppDispatch()
 	const packsCount = useAppSelector(cardPacksTotalCountSelector)
 	const packs = useAppSelector(packsSelector)
 	const [paginationModel, setPaginationModel] = React.useState({
-		pageSize: 5,
-		page: 1,
+		pageSize: 10,
+		page: 0,
 	});
 
 	useEffect(() => {
@@ -19,13 +21,25 @@ export const PacksList = () => {
 	}, [paginationModel])
 
 	if (!packs) {
-		return <div>Loading packs</div>
+		return <div>Загружаю колоды...</div>
 	}
 
 	return (
 		<div>
-			<h2>Общее количество карточек: {packsCount} шт.</h2>
-			<DataTable arrayToDraw={packs} paginationModel={paginationModel} setPaginationModel={setPaginationModel}/>
+			<h2>
+				Общее количество карточек: {packsCount} шт.
+				<span><button>Создать колоду</button></span>
+			</h2>
+			{viewModal && <Modal title={'Новая колода'}>
+                <input/>
+                <div>Создать колоду?</div>
+                <span>
+						<button>Создать</button>
+						<button>Отмена</button>
+					</span>
+            </Modal>}
+			<DataTable arrayToDraw={packs} paginationModel={paginationModel}
+					   setPaginationModel={setPaginationModel}/>
 		</div>
 	);
 };
