@@ -4,9 +4,16 @@ import {AxiosResponse} from "axios";
 export const packsApi = {
 	getPacks(arg: ArgGetPacksType) {
 		return instance.get<AxiosResponse<PacksType>>(`cards/pack?page=${arg.page}&pageCount=${50}`)
+	},
+	addPack(arg: ArgAddPackType) {
+		return instance.post('cards/pack', arg)
 	}
 }
 
+export type ArgAddPackType = {
+	name: string
+	deckCover?: string | ArrayBuffer | null
+}
 
 export type PacksType = {
 	cardPacks: CardsPackType[]

@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {ArgGetPacksType, packsApi, PacksType} from "./packsApi";
+import {ArgAddPackType, ArgGetPacksType, packsApi, PacksType} from "./packsApi";
 import {createAppAsyncThunk} from "../../common/utils/createAppAsyncThunk";
 import {thunkTryCatch} from "../../common/utils/thunkTryCatch";
 
@@ -7,6 +7,15 @@ const getPacks = createAppAsyncThunk<{ packs: PacksType }, ArgGetPacksType>('pac
 	return thunkTryCatch(thunkAPI, async () => {
 		const res = await packsApi.getPacks({page: arg.page, pageSize: arg.pageSize})
 		return {packs: res.data}
+	})
+})
+
+const addPacks = createAppAsyncThunk<void, ArgAddPackType>('packs/addPacks', async (arg, thunkAPI) => {
+	const dispatch = thunkAPI.dispatch
+	return thunkTryCatch(thunkAPI, async () => {
+		const res = await packsApi.addPack({name: arg.name, deckCover: arg.deckCover})
+
+		// return {packs: res.data}
 	})
 })
 
@@ -26,4 +35,4 @@ const slice = createSlice({
 })
 
 export const packsReducer = slice.reducer
-export const packsThunks = {getPacks}
+export const packsThunks = {getPacks, addPacks}
