@@ -14,8 +14,7 @@ const addPacks = createAppAsyncThunk<void, ArgAddPackType>('packs/addPacks', asy
 	const dispatch = thunkAPI.dispatch
 	return thunkTryCatch(thunkAPI, async () => {
 		const res = await packsApi.addPack({name: arg.name, deckCover: arg.deckCover})
-
-		// return {packs: res.data}
+		dispatch(getPacks({page: 0, pageSize: 50}))
 	})
 })
 

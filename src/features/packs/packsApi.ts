@@ -6,7 +6,7 @@ export const packsApi = {
 		return instance.get<AxiosResponse<PacksType>>(`cards/pack?page=${arg.page}&pageCount=${50}`)
 	},
 	addPack(arg: ArgAddPackType) {
-		return instance.post('cards/pack', arg)
+		return instance.post('cards/pack', {cardsPack: {name: arg.name, deckCover: arg.deckCover}})
 	}
 }
 

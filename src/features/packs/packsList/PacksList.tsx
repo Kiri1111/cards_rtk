@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from "../../../app/hooks";
 import {packsThunks} from "../packsSlice";
 import {cardPacksTotalCountSelector, packsSelector} from "../packsSelectors";
@@ -7,7 +7,8 @@ import {Modal} from "../../../common/ui/components/modalWindow/Modal";
 
 export const PacksList = () => {
 
-	const [viewModal, setViewModal] = useState(true)
+	const [viewModal, setViewModal] = useState(false)
+	const [namePack, setNamePack] = useState('')
 	const dispatch = useAppDispatch()
 	const packsCount = useAppSelector(cardPacksTotalCountSelector)
 	const packs = useAppSelector(packsSelector)
@@ -21,7 +22,13 @@ export const PacksList = () => {
 	}, [paginationModel])
 
 	const openCreatePackModalHandler = () => setViewModal(true)
-
+	const addPackHandler = () => {
+		dispatch(packsThunks.addPacks({name: namePack}))
+		setViewModal(false)
+	}
+	const onChangeNamePack = (e: ChangeEvent<HTMLInputElement>) => {
+		setNamePack(e.currentTarget.value)
+	}
 
 	if (!packs) {
 		return <div>Загружаю колоды...</div>
@@ -35,10 +42,10 @@ export const PacksList = () => {
 			</h2>
 			{viewModal && <Modal setView={setViewModal} title={'Новая колода'}>
                 <div>Введите название:</div>
-                <input/>
+                <input value={namePack} onChange={onChangeNamePack}/>
                 <div>Создать колоду?</div>
                 <span>
-						<button>Создать</button>
+						<button onClick={addPackHandler}>Создать</button>
 						<button onClick={() => setViewModal(false)}>Отмена</button>
 					</span>
             </Modal>}

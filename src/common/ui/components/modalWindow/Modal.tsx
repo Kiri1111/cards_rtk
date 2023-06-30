@@ -11,7 +11,7 @@ export const Modal: FC<ModalPropsType> = ({title, children, setView}) => {
 	const closeModalHandler = () => setView(false)
 	return (
 		<div onClick={closeModalHandler} className={s.modalPage}>
-			<div className={s.modal}>
+			<div onClick={e => e.stopPropagation()} className={s.modal}>
 				<h3>{title}</h3>
 				{children}
 			</div>
