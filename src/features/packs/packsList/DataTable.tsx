@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {DataGrid, GridCallbackDetails, GridColDef, GridPaginationModel, GridValueGetterParams} from '@mui/x-data-grid';
+import {DataGrid, GridColDef, GridPaginationModel} from '@mui/x-data-grid';
 import {CardsPackType} from "../packsApi";
-
+import Icon from '../../../common/ui/images/editName.png'
 
 type PropsType = {
 	arrayToDraw: CardsPackType[]
@@ -13,11 +13,11 @@ export function DataTable(props: PropsType) {
 
 
 	const columns: GridColDef[] = [
-		{field: 'title', headerName: 'Название', width: 160},
-		{field: 'cardsCount', headerName: 'Количество карточек', width: 160},
-		{field: 'lastUpdated', headerName: 'Обновлено', width: 190},
-		{field: 'createdBy', headerName: 'Автор', width: 190},
-		{field: 'actions', headerName: 'Действия', width: 160},
+		{field: 'title', headerName: 'Название', width: 160, disableColumnMenu: true},
+		{field: 'cardsCount', headerName: 'Количество карточек', width: 160, disableColumnMenu: true},
+		{field: 'lastUpdated', headerName: 'Обновлено', width: 190, disableColumnMenu: true},
+		{field: 'createdBy', headerName: 'Автор', width: 190, disableColumnMenu: true},
+		{field: 'actions', headerName: 'Действия', width: 160, disableColumnMenu: true},
 		// {
 		// 	field: 'fullName',
 		// 	headerName: 'Full name',
@@ -29,13 +29,16 @@ export function DataTable(props: PropsType) {
 		// },
 	];
 
+	const updIcon = <img src={Icon} alt={'upd'}/>
+
 	const rows = props.arrayToDraw.map(el => {
 		return {
 			id: el._id,
 			title: el.name,
 			cardsCount: el.cardsCount,
 			lastUpdated: el.updated.slice(0, 10),
-			createdBy: el.user_name
+			createdBy: el.user_name,
+			actions: updIcon
 		}
 	})
 
@@ -47,6 +50,7 @@ export function DataTable(props: PropsType) {
 				paginationModel={props.paginationModel}
 				onPaginationModelChange={props.setPaginationModel}
 				rows={rows}
+				onRowClick={() => alert('hi')}
 				columns={columns}
 				initialState={{
 					// pagination: {
